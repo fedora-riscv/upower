@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -23,6 +23,9 @@ Requires:       udev
 Requires:       pm-utils >= 1.2.2.1
 Requires:       gobject-introspection
 
+# we don't provide DeviceKit-power as that just puts off the pain
+Obsoletes: DeviceKit-power < 1:0.9.0-2
+
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
 line tools for managing power devices attached to the system.
@@ -32,6 +35,7 @@ Summary: Headers and libraries for UPower
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: gtk-doc
+Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
 
 %description devel
 Headers and libraries for UPower.
@@ -90,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Mar 15 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-3
+- Obsolete DeviceKit-power.
+
 * Mon Mar 15 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-2
 - Actually enable the introspection support.
 
