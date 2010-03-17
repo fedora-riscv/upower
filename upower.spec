@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -23,8 +23,11 @@ Requires:       udev
 Requires:       pm-utils >= 1.2.2.1
 Requires:       gobject-introspection
 
-# we don't provide DeviceKit-power as that just puts off the pain
+# Old project name
 Obsoletes: DeviceKit-power < 1:0.9.0-2
+
+# We will drop this in F15
+Provides: DeviceKit-power
 
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
@@ -36,6 +39,8 @@ Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: gtk-doc
 Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
+# We will drop this in F15
+Provides: DeviceKit-power-devel
 
 %description devel
 Headers and libraries for UPower.
@@ -94,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Mar 17 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-4
+- It seems people don't like pain.
+
 * Mon Mar 15 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-3
 - Obsolete DeviceKit-power.
 
