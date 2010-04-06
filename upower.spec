@@ -1,11 +1,11 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.1
+Version:        0.9.2
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
-Source0:        http://hal.freedesktop.org/releases/UPower-%{version}.tar.bz2
+Source0:        http://hal.freedesktop.org/releases/upower-%{version}.tar.bz2
 BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -17,9 +17,17 @@ BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
 BuildRequires:  polkit-devel >= 0.92
+BuildRequires:  gobject-introspection-devel
 Requires:       polkit >= 0.92
 Requires:       udev
 Requires:       pm-utils >= 1.2.2.1
+Requires:       gobject-introspection
+
+# Old project name
+Obsoletes: DeviceKit-power < 1:0.9.0-2
+
+# We will drop this in F15
+Provides: DeviceKit-power
 
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
@@ -30,26 +38,29 @@ Summary: Headers and libraries for UPower
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: gtk-doc
+Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
+# We will drop this in F15
+Provides: DeviceKit-power-devel
 
 %description devel
 Headers and libraries for UPower.
 
 %prep
-%setup -q -n UPower-%{version}
+%setup -q
 
 %build
-%configure --enable-gtk-doc  --disable-static
+%configure \
+        --enable-gtk-doc \
+        --disable-static \
+        --enable-introspection
+
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang UPower
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 
@@ -88,6 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
-* Wed Mar 03 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-1
+* Tue Apr 06 2010 Richard Hughes <rhughes@redhat.com> - 0.9.2-1
+- New upstream release.
+- Obsolete DeviceKit-power.
+
+* Mon Mar 15 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-2
 - Initial release of 0.9.1
 
