@@ -1,11 +1,11 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.1
-Release:        4%{?dist}
+Version:        0.9.2
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
-Source0:        http://hal.freedesktop.org/releases/UPower-%{version}.tar.bz2
+Source0:        http://hal.freedesktop.org/releases/upower-%{version}.tar.bz2
 BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -46,21 +46,21 @@ Provides: DeviceKit-power-devel
 Headers and libraries for UPower.
 
 %prep
-%setup -q -n UPower-%{version}
+%setup -q
 
 %build
-%configure --enable-gtk-doc  --disable-static --enable-introspection
+%configure \
+        --enable-gtk-doc \
+        --disable-static \
+        --enable-introspection
+
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang UPower
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 
@@ -99,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Apr 06 2010 Richard Hughes <rhughes@redhat.com> - 0.9.2-1
+- New upstream release.
+
 * Wed Mar 17 2010 Richard Hughes <rhughes@redhat.com> - 0.9.1-4
 - It seems people don't like pain.
 
