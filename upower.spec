@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.2
+Version:        0.9.3
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -60,13 +60,13 @@ make %{?_smp_mflags}
 make install DESTDIR=$RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
-%find_lang UPower
+%find_lang upower
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
-%files -f UPower.lang
+%files -f upower.lang
 %defattr(-,root,root,-)
 %doc NEWS COPYING AUTHORS HACKING README
 %{_libdir}/libdevkit-power-gobject*.so.*
@@ -74,6 +74,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_sysconfdir}/dbus-1/system.d/*.conf
 /lib/udev/rules.d/*.rules
 %dir %{_localstatedir}/lib/upower
+%dir %{_sysconfdir}/UPower
+%config %{_sysconfdir}/UPower/UPower.conf
 %{_bindir}/*
 %{_libexecdir}/*
 %{_mandir}/man1/*
@@ -99,6 +101,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Thu May 06 2010 Richard Hughes <rhughes@redhat.com> - 0.9.3-1
+- New upstream release.
+
 * Tue Apr 06 2010 Richard Hughes <rhughes@redhat.com> - 0.9.2-1
 - New upstream release.
 - Obsolete DeviceKit-power.
