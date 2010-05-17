@@ -1,12 +1,11 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.3
+Version:        0.9.4
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
 Source0:        http://hal.freedesktop.org/releases/upower-%{version}.tar.bz2
-BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
 BuildRequires:  intltool
@@ -101,6 +100,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon May 17 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.4-1
+- Make my laptop suspend again when I close the lid
+
 * Thu May 06 2010 Richard Hughes <rhughes@redhat.com> - 0.9.3-1
 - New upstream release.
 
