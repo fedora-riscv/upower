@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.4
+Version:        0.9.5
 Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://hal.freedesktop.org/releases/
@@ -10,7 +10,7 @@ BuildRequires:  libtool
 BuildRequires:  intltool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
-BuildRequires:  libusb-devel
+BuildRequires:  libusb1-devel
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
@@ -99,6 +99,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Jul 12 2010 Richard Hughes <rhughes@redhat.com> - 0.9.5-1
+- New upstream release.
+- Add battery query support for iDevices
+- Dynamic testing for enough hibernate swap
+- Port UPower to libusb1 to avoid unfixable crashes
+- Update the list of supported TrippLite HID Power Devices
+
 * Wed May 06 2010 Richard Hughes <rhughes@redhat.com> - 0.9.4-1
 - New upstream release.
 - Fix suspend on lid close failure.
