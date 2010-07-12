@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -100,6 +100,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Jul 12 2010 Colin Walters <walters@verbum.org> - 0.9.5-2
+- Rebuild against new gobject-introspection
+
 * Mon Jul 12 2010 Richard Hughes <rhughes@redhat.com> - 0.9.5-1
 - New upstream release.
 
