@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.4
+Version:        0.9.5
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -11,7 +11,7 @@ BuildRequires:  libtool
 BuildRequires:  intltool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
-BuildRequires:  libusb-devel
+BuildRequires:  libusb1-devel
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
@@ -100,6 +100,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Jul 12 2010 Richard Hughes <rhughes@redhat.com> - 0.9.5-1
+- New upstream release.
+
 * Mon May 17 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.4-1
 - Make my laptop suspend again when I close the lid
 
