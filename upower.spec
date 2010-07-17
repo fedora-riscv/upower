@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -11,7 +11,9 @@ BuildRequires:  libtool
 BuildRequires:  intltool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
+%ifnarch s390 s390x
 BuildRequires:  libusb1-devel
+%endif
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
@@ -51,7 +53,10 @@ Headers and libraries for UPower.
 %configure \
         --enable-gtk-doc \
         --disable-static \
-        --enable-introspection
+        --enable-introspection \
+%ifarch s390 s390x
+	--with-backend=dummy
+%endif
 
 make %{?_smp_mflags}
 
@@ -100,6 +105,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Sat Jul 17 2010 Dan Horák <dan[at]danny.cz> - 0.9.5-3
+- use dummy backend on s390(x) because the Linux backend requires USB
+
 * Mon Jul 12 2010 Colin Walters <walters@verbum.org> - 0.9.5-2
 - Rebuild against new gobject-introspection
 
