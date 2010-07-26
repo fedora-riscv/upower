@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -13,6 +13,7 @@ BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
 %ifnarch s390 s390x
 BuildRequires:  libusb1-devel
+BuildRequires:  libimobiledevice-devel
 %endif
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  dbus-devel  >= 1.2
@@ -107,6 +108,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Jul 26 2010 Bastien Nocera <bnocera@redhat.com> 0.9.5-4
+- Add support for iDevice battery checking
+
 * Sat Jul 17 2010 Dan Horák <dan[at]danny.cz> - 0.9.5-3
 - use dummy backend on s390(x) because the Linux backend requires USB
 
