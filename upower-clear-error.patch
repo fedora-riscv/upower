@@ -1,0 +1,19 @@
+diff -up upower-0.9.5/src/up-polkit.c.clear-error upower-0.9.5/src/up-polkit.c
+--- upower-0.9.5/src/up-polkit.c.clear-error	2010-08-12 21:43:03.739052001 -0400
++++ upower-0.9.5/src/up-polkit.c	2010-08-12 21:44:00.787052001 -0400
+@@ -73,6 +73,7 @@ up_polkit_check_auth (UpPolkit *polkit, 
+ 	PolkitAuthorizationResult *result;
+ 
+ 	/* check auth */
++        error_local = NULL;
+ 	result = polkit_authority_check_authorization_sync (polkit->priv->authority, subject, action_id, NULL, POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION, NULL, &error_local);
+ 	if (result == NULL) {
+ 		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to check authorisation: %s", error_local->message);
+@@ -108,6 +109,7 @@ up_polkit_is_allowed (UpPolkit *polkit, 
+ 	PolkitAuthorizationResult *result;
+ 
+ 	/* check auth */
++        error_local = NULL;
+ 	result = polkit_authority_check_authorization_sync (polkit->priv->authority, subject, action_id, NULL, POLKIT_CHECK_AUTHORIZATION_FLAGS_NONE, NULL, &error_local);
+ 	if (result == NULL) {
+ 		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to check authorisation: %s", error_local->message);
