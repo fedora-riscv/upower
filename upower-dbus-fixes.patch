@@ -1,6 +1,6 @@
 diff -up upower-0.9.5/src/up-daemon.c.dbus-fixes upower-0.9.5/src/up-daemon.c
 --- upower-0.9.5/src/up-daemon.c.dbus-fixes	2010-07-08 03:50:24.000000000 -0400
-+++ upower-0.9.5/src/up-daemon.c	2010-08-17 22:14:59.429257004 -0400
++++ upower-0.9.5/src/up-daemon.c	2010-08-17 22:22:58.741257003 -0400
 @@ -323,6 +323,7 @@ up_daemon_about_to_sleep (UpDaemon *daem
  				     UP_DAEMON_ERROR_GENERAL,
  				     "Sleep has already been requested and is pending");
@@ -114,8 +114,8 @@ diff -up upower-0.9.5/src/up-daemon.c.dbus-fixes upower-0.9.5/src/up-daemon.c
  out:
  	if (subject != NULL)
 diff -up upower-0.9.5/src/up-polkit.c.dbus-fixes upower-0.9.5/src/up-polkit.c
---- upower-0.9.5/src/up-polkit.c.dbus-fixes	2010-08-17 22:14:59.423257004 -0400
-+++ upower-0.9.5/src/up-polkit.c	2010-08-17 22:16:35.854257006 -0400
+--- upower-0.9.5/src/up-polkit.c.dbus-fixes	2010-08-17 22:22:58.735257003 -0400
++++ upower-0.9.5/src/up-polkit.c	2010-08-17 22:23:40.437257006 -0400
 @@ -52,12 +52,19 @@ static gpointer up_polkit_object = NULL;
  PolkitSubject *
  up_polkit_get_subject (UpPolkit *polkit, DBusGMethodInvocation *context)
@@ -159,13 +159,13 @@ diff -up upower-0.9.5/src/up-polkit.c.dbus-fixes upower-0.9.5/src/up-polkit.c
  	GError *error_local;
  	PolkitAuthorizationResult *result;
  
-@@ -112,10 +118,9 @@ up_polkit_is_allowed (UpPolkit *polkit, 
+@@ -112,10 +118,8 @@ up_polkit_is_allowed (UpPolkit *polkit, 
          error_local = NULL;
  	result = polkit_authority_check_authorization_sync (polkit->priv->authority, subject, action_id, NULL, POLKIT_CHECK_AUTHORIZATION_FLAGS_NONE, NULL, &error_local);
  	if (result == NULL) {
 -		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to check authorisation: %s", error_local->message);
+-		dbus_g_method_return_error (context, error);
 +		g_set_error (error, UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to check authorisation: %s", error_local->message);
- 		dbus_g_method_return_error (context, error);
  		g_error_free (error_local);
 -		g_error_free (error);
  		goto out;
@@ -173,7 +173,7 @@ diff -up upower-0.9.5/src/up-polkit.c.dbus-fixes upower-0.9.5/src/up-polkit.c
  
 diff -up upower-0.9.5/src/up-polkit.h.dbus-fixes upower-0.9.5/src/up-polkit.h
 --- upower-0.9.5/src/up-polkit.h.dbus-fixes	2010-02-10 12:09:31.000000000 -0500
-+++ upower-0.9.5/src/up-polkit.h	2010-08-17 22:14:59.432257004 -0400
++++ upower-0.9.5/src/up-polkit.h	2010-08-17 22:22:58.746257003 -0400
 @@ -56,11 +56,11 @@ PolkitSubject	*up_polkit_get_subject		(U
  gboolean	 up_polkit_check_auth		(UpPolkit		*polkit,
  						 PolkitSubject		*subject,
@@ -190,7 +190,7 @@ diff -up upower-0.9.5/src/up-polkit.h.dbus-fixes upower-0.9.5/src/up-polkit.h
                                                   uid_t                  *uid);
 diff -up upower-0.9.5/src/up-qos.c.dbus-fixes upower-0.9.5/src/up-qos.c
 --- upower-0.9.5/src/up-qos.c.dbus-fixes	2010-06-05 11:45:18.000000000 -0400
-+++ upower-0.9.5/src/up-qos.c	2010-08-17 22:14:59.433257004 -0400
++++ upower-0.9.5/src/up-qos.c	2010-08-17 22:22:58.748257003 -0400
 @@ -262,6 +262,7 @@ up_qos_request_latency (UpQos *qos, cons
  	if (type == UP_QOS_KIND_UNKNOWN) {
  		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "type invalid: %s", type_text);
