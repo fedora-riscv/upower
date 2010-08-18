@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        5%{?dist}
+Release:        6%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -34,6 +34,8 @@ Provides: DeviceKit-power
 # Prevent a crash when gnome-power-manager starts up
 Patch0: upower-clear-error.patch
 
+Patch1: upower-dbus-fixes.patch
+
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
 line tools for managing power devices attached to the system.
@@ -53,6 +55,7 @@ Headers and libraries for UPower.
 %prep
 %setup -q
 %patch0 -p1 -b .clear-error
+%patch1 -p1 -b .dbus-fixes
 
 %build
 %configure \
@@ -112,6 +115,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Aug 17 2010 Matthias Clasen <mclasen@redhat.com> 0.9.5-6
+- DBus error handling fixes
+
 * Thu Aug 12 2010 Matthias Clasen <mclasen@redhat.com> 0.9.5-5
 - Prevent crash due to uninitialized GError
 
