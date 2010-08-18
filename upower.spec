@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        5%{?dist}
+Release:        6%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -28,6 +28,10 @@ Requires:       gobject-introspection
 # Upstream: don't crash with new polkits.
 Patch0:    upower-0.9.6-ensure-gerror-is-init.patch
 
+# Don't return more or less than once from a dbus call
+# and don't leak errors all over the place
+Patch1:    upower-dbus-fixes.patch
+
 # Old project name
 Obsoletes: DeviceKit-power < 1:0.9.0-2
 
@@ -53,6 +57,7 @@ Headers and libraries for UPower.
 %prep
 %setup -q
 %patch0 -p1 -b .new-polkit
+%patch1 -p1 -b .dbus-fixes
 
 %build
 %configure \
@@ -112,6 +117,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Aug 17 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.5-6
+- Some fixes for dbus error handling
+
 * Tue Aug 10 2010 Richard Hughes <rhughes@redhat.com> - 0.9.5-5
 - Ensure we've initialized errors when calling into PolicyKit.
 - Resolves: #622830
