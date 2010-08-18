@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        6%{?dist}
+Release:        7%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -115,6 +115,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Aug 18 2010 Matthias Clasen <mclasen@redhat.com> 0.9.5-7
+- Rebuild to work around bodhi limitations
+
 * Tue Aug 17 2010 Matthias Clasen <mclasen@redhat.com> 0.9.5-6
 - DBus error handling fixes
 
