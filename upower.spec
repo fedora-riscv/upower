@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        7%{?dist}
+Release:        8%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -44,7 +44,6 @@ line tools for managing power devices attached to the system.
 Summary: Headers and libraries for UPower
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
-Requires: gtk-doc
 Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
 # We will drop this in F15
 Provides: DeviceKit-power-devel
@@ -101,8 +100,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %files devel
 %defattr(-,root,root,-)
 %{_datadir}/dbus-1/interfaces/*.xml
-%dir %{_datadir}/gtk-doc/html/UPower
-%{_datadir}/gtk-doc/html/UPower/*
+%{_datadir}/gtk-doc
 %{_libdir}/libdevkit-power-gobject*.so
 %{_libdir}/libupower-glib.so
 %{_libdir}/pkgconfig/*.pc
@@ -115,6 +113,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Aug 23 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.5-8
+- Co-own /usr/share/gtk-doc
+
 * Wed Aug 18 2010 Matthias Clasen <mclasen@redhat.com> 0.9.5-7
 - Rebuild to work around bodhi limitations
 
