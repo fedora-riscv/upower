@@ -20,6 +20,7 @@ BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
 BuildRequires:  polkit-devel >= 0.92
 BuildRequires:  gobject-introspection-devel
+BuildRequires:  gtk-doc
 Requires:       polkit >= 0.92
 Requires:       udev
 Requires:       pm-utils >= 1.2.2.1
