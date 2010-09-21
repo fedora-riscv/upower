@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        8%{?dist}
+Release:        9%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -115,6 +115,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Sep 21 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.5-9
+- Rebuild against newer gobject-introspection
+
 * Mon Aug 23 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.5-8
 - Co-own /usr/share/gtk-doc
 
