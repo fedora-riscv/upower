@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.5
-Release:        9%{?dist}
+Release:        10%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -116,6 +116,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Sep 29 2010 jkeating - 0.9.5-10
+- Rebuilt for gcc bug 634757
+
 * Tue Sep 21 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.5-9
 - Rebuild against newer gobject-introspection
 
