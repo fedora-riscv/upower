@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.5
-Release:        10%{?dist}
+Version:        0.9.6
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -26,19 +26,6 @@ Requires:       udev
 Requires:       pm-utils >= 1.2.2.1
 Requires:       gobject-introspection
 
-# Upstream: don't crash with new polkits.
-Patch0:    upower-0.9.6-ensure-gerror-is-init.patch
-
-# Don't return more or less than once from a dbus call
-# and don't leak errors all over the place
-Patch1:    upower-dbus-fixes.patch
-
-# Old project name
-Obsoletes: DeviceKit-power < 1:0.9.0-2
-
-# We will drop this in F15
-Provides: DeviceKit-power
-
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
 line tools for managing power devices attached to the system.
@@ -48,16 +35,12 @@ Summary: Headers and libraries for UPower
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
-# We will drop this in F15
-Provides: DeviceKit-power-devel
 
 %description devel
 Headers and libraries for UPower.
 
 %prep
 %setup -q
-%patch0 -p1 -b .new-polkit
-%patch1 -p1 -b .dbus-fixes
 
 %build
 %configure \
@@ -83,7 +66,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %files -f upower.lang
 %defattr(-,root,root,-)
 %doc NEWS COPYING AUTHORS HACKING README
-%{_libdir}/libdevkit-power-gobject*.so.*
 %{_libdir}/libupower-glib.so.*
 %{_sysconfdir}/dbus-1/system.d/*.conf
 %ifnarch s390 s390x
@@ -104,11 +86,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %defattr(-,root,root,-)
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_datadir}/gtk-doc
-%{_libdir}/libdevkit-power-gobject*.so
+%dir %{_datadir}/gtk-doc/html/UPower
+%{_datadir}/gtk-doc/html/UPower/*
 %{_libdir}/libupower-glib.so
 %{_libdir}/pkgconfig/*.pc
-%dir %{_includedir}/DeviceKit-power/devkit-power-gobject
-%{_includedir}/DeviceKit-power/devkit-power-gobject/*.h
 %{_libdir}/girepository-1.0/*.typelib
 %{_datadir}/gir-1.0/*.gir
 %dir %{_includedir}/libupower-glib
@@ -116,6 +97,14 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Oct 04 2010 Richard Hughes <rhughes@redhat.com> - 0.9.6-1
+- New upstream release.
+- Fix compile with the latest PolicyKit release.
+- Only save by default 7 days data to stop the log files becoming huge.
+- Do not continue to poll the serial port if there is no Watts Up Pro adaptor.
+- Fix the build with new versions of gobject-introspection.
+- Resolves #634228
+
 * Wed Sep 29 2010 jkeating - 0.9.5-10
 - Rebuilt for gcc bug 634757
 
