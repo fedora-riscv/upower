@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.6
+Version:        0.9.7
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -97,6 +97,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Nov 01 2010 Richard Hughes <rhughes@redhat.com> - 0.9.7-1
+- New upstream release.
+- Add support for controlling leds keyboard backlight
+- Fix building with gobject-introspection 0.9.10
+
 * Mon Oct 04 2010 Richard Hughes <rhughes@redhat.com> - 0.9.6-1
 - New upstream release.
 - Fix compile with the latest PolicyKit release.
