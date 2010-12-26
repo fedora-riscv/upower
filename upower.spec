@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -97,6 +97,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Sun Dec 26 2010 Bastien Nocera <bnocera@redhat.com> 0.9.7-2
+- Rebuild for new libimobiledevice
+
 * Mon Nov 01 2010 Richard Hughes <rhughes@redhat.com> - 0.9.7-1
 - New upstream release.
 - Add support for controlling leds keyboard backlight
