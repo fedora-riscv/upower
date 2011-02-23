@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -97,7 +97,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
-* Wed Feb 23 2011 Colin Walters <walters@verbum.org> - 0.9.8-2
+* Wed Feb 23 2011 Colin Walters <walters@verbum.org> - 0.9.8-3
 - Move typelib file to main package; it should go along with the .so;
   i.e. gnome-shell shouldn't require upower-devel.
 
