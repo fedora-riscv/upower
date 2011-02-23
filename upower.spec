@@ -76,6 +76,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %config %{_sysconfdir}/UPower/UPower.conf
 %{_bindir}/*
 %{_libexecdir}/*
+%{_libdir}/girepository-1.0/*.typelib
 %{_mandir}/man1/*
 %{_mandir}/man7/*
 %{_mandir}/man8/*
@@ -90,13 +91,16 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 %{_libdir}/libupower-glib.so
 %{_libdir}/pkgconfig/*.pc
-%{_libdir}/girepository-1.0/*.typelib
 %{_datadir}/gir-1.0/*.gir
 %dir %{_includedir}/libupower-glib
 %{_includedir}/libupower-glib/up-*.h
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Feb 23 2011 Colin Walters <walters@verbum.org> - 0.9.8-2
+- Move typelib file to main package; it should go along with the .so;
+  i.e. gnome-shell shouldn't require upower-devel.
+
 * Mon Feb 07 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
