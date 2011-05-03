@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.9
-Release:        2%{?dist}
+Version:        0.9.10
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -100,6 +100,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue May 03 2011 Richard Hughes <rhughes@redhat.com> - 0.9.10-1
+- New upstream release.
+- Add a config option 'IgnoreLid' for users with broken lid switches
+- Consider a discharging UPS as "on battery"
+- Support batteries that report both energy and charge
+- Use the new threadsafe signal handling support in GLib
+
 * Thu Apr  7 2011 Matthias clasen <mclasen@redhat.com> - 0.9.9-2
 - Keep the Obsoletes/Provides for now (#641173)
 
