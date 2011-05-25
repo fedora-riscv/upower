@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.10
+Version:        0.9.11
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -100,6 +100,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed May 25 2011 Richard Hughes <rhughes@redhat.com> - 0.9.11-1
+- New upstream release.
+- Only include glib-unix.h if the GLib version is >= 2.29.4
+
 * Tue May 03 2011 Richard Hughes <rhughes@redhat.com> - 0.9.10-1
 - New upstream release.
 - Add a config option 'IgnoreLid' for users with broken lid switches
