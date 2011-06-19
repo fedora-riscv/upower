@@ -16,6 +16,7 @@ BuildRequires:  libusb1-devel
 BuildRequires:  libimobiledevice-devel
 %endif
 BuildRequires:  glib2-devel >= 2.6.0
+BuildRequires:  gtk-doc
 BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
 BuildRequires:  polkit-devel >= 0.92
@@ -113,6 +114,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Sun Jun 19 2011 Peter Robinson <pbrobinson@gmail.com> - 0.9.5-9
+- we're building gtk-docs so we'd better require it for the build too
+
 * Mon Aug 23 2010 Matthias Clasen <mclasen@redhat.com> - 0.9.5-8
 - Co-own /usr/share/gtk-doc
 
