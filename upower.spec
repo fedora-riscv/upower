@@ -1,11 +1,11 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.11
+Version:        0.9.12
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
-Source0:        http://hal.freedesktop.org/releases/upower-%{version}.tar.bz2
+Source0:        http://hal.freedesktop.org/releases/upower-%{version}.tar.xz
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
 BuildRequires:  intltool
@@ -100,6 +100,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Jul 04 2011 Richard Hughes <rhughes@redhat.com> - 0.9.12-1
+- New upstream release.
+- Fix how we estimate the device rate for batteries that do not provide
+  this data.
+
 * Wed May 25 2011 Richard Hughes <rhughes@redhat.com> - 0.9.11-1
 - New upstream release.
 - Only include glib-unix.h if the GLib version is >= 2.29.4
