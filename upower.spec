@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.12
+Version:        0.9.13
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -97,6 +97,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Sep 05 2011 Richard Hughes <rhughes@redhat.com> - 0.9.13-1
+- New upstream release.
+- Blacklist wacom battery devices as not power-supply devices.
+
 * Mon Jul 04 2011 Richard Hughes <rhughes@redhat.com> - 0.9.12-1
 - New upstream release.
 - Fix how we estimate the device rate for batteries that do not provide
