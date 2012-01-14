@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.15
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -97,6 +97,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.15-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Mon Dec 05 2011 Richard Hughes <rhughes@redhat.com> - 0.9.15-1
 - Use linear regression to get better predicted battery times.
 - Don't spam the log when we're saving history when on low power.
