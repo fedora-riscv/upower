@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.15
+Version:        0.9.16
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -82,6 +82,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_mandir}/man8/*
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
+/usr/lib/systemd/system/*.service
 
 %files devel
 %defattr(-,root,root,-)
@@ -97,6 +98,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Apr 30 2012 Richard Hughes <rhughes@redhat.com> - 0.9.16-1
+- New upstream release
+- Install a systemd service file
+- Clamp the UPS percentage from 0 to 100 to fix syslog spam
+- Correct the cap on the energy rate
+- Fix crash in up_device_csr_finalize
+- Never detect HID devices with batteries as power supplies
+- Re-coldplug dock status when resuming from sleep
+
 * Mon Dec 05 2011 Richard Hughes <rhughes@redhat.com> - 0.9.15-1
 - Use linear regression to get better predicted battery times.
 - Don't spam the log when we're saving history when on low power.
