@@ -82,7 +82,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_mandir}/man8/*
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
-/usr/lib/systemd/system/*.service
+/lib/systemd/system/*.service
 
 %files devel
 %defattr(-,root,root,-)
