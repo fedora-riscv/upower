@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.16
+Version:        0.9.17
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -98,6 +98,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Jun 25 2012 Richard Hughes <rhughes@redhat.com> - 0.9.17-1
+- New upstream release
+- Don't allow non-power-supply devices to set the OnBattery property
+- Fix the LatencyChanged signal
+- Fix wrong PowerSupply property for devices without a scope sysfs attribute
+- Treat the battery state 'not charging' as PENDING_CHARGE
+
 * Mon Apr 30 2012 Richard Hughes <rhughes@redhat.com> - 0.9.16-1
 - New upstream release
 - Install a systemd service file
