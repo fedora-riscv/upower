@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.17
-Release:        2%{?dist}
+Version:        0.9.18
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://hal.freedesktop.org/releases/
@@ -83,6 +83,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 /usr/lib/systemd/system/*.service
+/usr/lib/systemd/system-sleep/notify-upower.sh
 
 %files devel
 %defattr(-,root,root,-)
@@ -98,6 +99,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Oct  9 2012 Matthias Clasen <mclasen@redhat.com> - 0.9.18-1
+- New upstream release
+- Use systemd for suspend and hibernate
+
 * Sun Jul 22 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.17-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
