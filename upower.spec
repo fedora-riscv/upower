@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.19
-Release:        1%{?dist}
+Release:        1%{?dist}.1
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -83,7 +83,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 /usr/lib/systemd/system/*.service
+%ifnarch s390 s390x
 /usr/lib/systemd/system-sleep/notify-upower.sh
+%endif
 
 %files devel
 %defattr(-,root,root,-)
@@ -99,6 +101,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Jan 23 2013 Dan Horák <dan[at]danny.cz> - 0.9.19-1.1
+- the notify-upower script is not installed with dummy backend on s390(x)
+
 * Wed Jan 02 2013 Richard Hughes <rhughes@redhat.com> - 0.9.19-1
 - New upstream release
 - Add a Documentation tag to the service file
