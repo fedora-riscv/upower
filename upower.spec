@@ -4,8 +4,8 @@ Version:        0.9.17
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
-URL:            http://hal.freedesktop.org/releases/
-Source0:        http://hal.freedesktop.org/releases/upower-%{version}.tar.xz
+URL:            http://upower.freedesktop.org/
+Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
 BuildRequires:  intltool
