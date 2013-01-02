@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.18
-Release:        2%{?dist}
+Version:        0.9.19
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -101,6 +101,14 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Jan 02 2013 Richard Hughes <rhughes@redhat.com> - 0.9.19-1
+- New upstream release
+- Add a Documentation tag to the service file
+- Add support for Logitech Unifying devices
+- Do not continue to poll if /proc/timer_stats is not readable
+- Fix device matching for recent kernels
+- Resolves: #848521
+
 * Wed Oct 24 2012 Dan Horák <dan[at]danny.cz> - 0.9.18-2
 - the notify-upower script is not installed with dummy backend on s390(x)
 
