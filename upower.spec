@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.17
+Version:        0.9.19
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -83,6 +83,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 /usr/lib/systemd/system/*.service
+/usr/lib/systemd/system-sleep/notify-upower.sh
 
 %files devel
 %defattr(-,root,root,-)
@@ -98,6 +99,14 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Jan 02 2013 Richard Hughes <rhughes@redhat.com> - 0.9.19-1
+- New upstream release
+- Add a Documentation tag to the service file
+- Add support for Logitech Unifying devices
+- Do not continue to poll if /proc/timer_stats is not readable
+- Fix device matching for recent kernels
+- Resolves: #848521
+
 * Mon Jun 25 2012 Richard Hughes <rhughes@redhat.com> - 0.9.17-1
 - New upstream release
 - Don't allow non-power-supply devices to set the OnBattery property
