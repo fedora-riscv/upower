@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.19
-Release:        2%{?dist}
+Version:        0.9.20
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -23,7 +23,6 @@ BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
 Requires:       polkit >= 0.92
 Requires:       udev
-Requires:       pm-utils >= 1.2.2.1
 Requires:       gobject-introspection
 
 %description
@@ -101,6 +100,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Mon Mar 20 2013 Richard Hughes <rhughes@redhat.com> - 0.9.20-1
+- New upstream release
+- Add a --enable-deprecated configure argument to remove pm-utils support
+- Deprecate running the powersave scripts
+- Factor out the Logitech Unifying support to support other devices
+- Require unfixed applications to define UPOWER_ENABLE_DEPRECATED
+- Fix batteries which report current energy but full charge
+- Fix several small memory leaks
+
 * Fri Feb 15 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.19-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
