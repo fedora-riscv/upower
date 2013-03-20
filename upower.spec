@@ -103,7 +103,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 * Tue Mar 19 2013 Matthias Clasen <mclasen@redhat.com> - 0.9.20-2
 - Rebuild
 
-* Mon Mar 20 2013 Richard Hughes <rhughes@redhat.com> - 0.9.20-1
+* Mon Mar 11 2013 Richard Hughes <rhughes@redhat.com> - 0.9.20-1
 - New upstream release
 - Add a --enable-deprecated configure argument to remove pm-utils support
 - Deprecate running the powersave scripts
