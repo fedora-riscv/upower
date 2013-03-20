@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.20
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -100,6 +100,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Mar 19 2013 Matthias Clasen <mclasen@redhat.com> - 0.9.20-2
+- Rebuild
+
 * Mon Mar 20 2013 Richard Hughes <rhughes@redhat.com> - 0.9.20-1
 - New upstream release
 - Add a --enable-deprecated configure argument to remove pm-utils support
