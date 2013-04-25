@@ -1,7 +1,9 @@
+%global _hardened_build 1
+
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.20
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -68,7 +70,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libupower-glib.so.*
 %{_sysconfdir}/dbus-1/system.d/*.conf
 %ifnarch s390 s390x
-/lib/udev/rules.d/*.rules
+/usr/lib/udev/rules.d/*.rules
 %endif
 %dir %{_localstatedir}/lib/upower
 %dir %{_sysconfdir}/UPower
@@ -100,6 +102,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Thu Apr 25 2013 Matthias Clasen <mclasen@redhat.com> - 0.9.20-3
+- Enabled hardened build
+- Don't use /lib/udev in file paths
+
 * Tue Mar 19 2013 Matthias Clasen <mclasen@redhat.com> - 0.9.20-2
 - Rebuild
 
