@@ -1,9 +1,7 @@
-%global _hardened_build 1
-
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.20
-Release:        3%{?dist}
+Version:        0.9.21
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -102,6 +100,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Fri Jul 26 2013 Richard Hughes <rhughes@redhat.com> - 0.9.21-1
+- New upstream release
+- Add support for Logitech Wireless (NonUnifying) devices
+- Allow clients to call org.freedesktop.DBus.Peer
+- Update the upower man page with all the current options
+- Use PIE to better secure installed tools and also use full RELRO in the daemon
+
 * Thu Apr 25 2013 Matthias Clasen <mclasen@redhat.com> - 0.9.20-3
 - Enabled hardened build
 - Don't use /lib/udev in file paths
