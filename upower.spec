@@ -50,7 +50,8 @@ Headers and libraries for UPower.
 	--with-backend=dummy
 %endif
 
-make %{?_smp_mflags}
+# Disable SMP build, fails to build docs
+make
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
