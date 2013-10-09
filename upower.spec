@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.21
+Version:        0.9.22
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -100,6 +100,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Oct 09 2013 Bastien Nocera <bnocera@redhat.com> 0.9.22-1
+- Update to 0.9.22
+- Fixes incorrect reporting of some properties
+- Fixes battery values for Logitech unifying devices
+- Bluetooth input devices support
+- Device name fixes
+
 * Fri Jul 26 2013 Richard Hughes <rhughes@redhat.com> - 0.9.21-1
 - New upstream release
 - Add support for Logitech Wireless (NonUnifying) devices
