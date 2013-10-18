@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.22
+Version:        0.9.23
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -101,6 +101,16 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Fri Oct 18 2013 Richard Hughes <rhughes@redhat.com> - 0.9.23-1
+- New upstream release
+- Add missing dbus-glib-1 to private requires
+- Avoid trying to close fd that wasn't opened
+- Disable Watts-Up devices by default
+- Don't guess discharging state for devices
+- Fix crasher calling _about_to_sleep_sync()
+- Really don't overwrite retval with prop values
+- Update and correct Toshiba recall list
+
 * Wed Oct 09 2013 Bastien Nocera <bnocera@redhat.com> 0.9.22-1
 - Update to 0.9.22
 - Fixes incorrect reporting of some properties
