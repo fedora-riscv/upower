@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.9.23
+Version:        0.99.0
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -80,12 +80,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_mandir}/man1/*
 %{_mandir}/man7/*
 %{_mandir}/man8/*
-%{_datadir}/polkit-1/actions/*.policy
 %{_datadir}/dbus-1/system-services/*.service
 /usr/lib/systemd/system/*.service
-%ifnarch s390 s390x
-/usr/lib/systemd/system-sleep/notify-upower.sh
-%endif
 
 %files devel
 %defattr(-,root,root,-)
@@ -101,6 +97,21 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Tue Oct 29 2013 Richard Hughes <rhughes@redhat.com> - 0.99.0-1
+- New upstream release
+- This version contains major API changes and bumps library soname.
+- Add DisplayDevice composite battery
+- Add WarningLevel and IconName properties to all devices
+- Clamp percentage for overfull batteries
+- Emit PropertiesChanged signals
+- Enforce critical battery policy on the daemon side
+- Reduce client-side and daemon-side wake-ups
+- Register objects on the bus once they've been setup
+- Remove DeviceChanged and Changed signals
+- Remove OnLowBattery property (use WarningLevel instead)
+- Remove QoS support
+- Remove battery recall support
+
 * Fri Oct 18 2013 Richard Hughes <rhughes@redhat.com> - 0.9.23-1
 - New upstream release
 - Add missing dbus-glib-1 to private requires
