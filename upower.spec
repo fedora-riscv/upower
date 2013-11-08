@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -25,6 +25,8 @@ Requires:       polkit >= 0.92
 Requires:       udev
 Requires:       gobject-introspection
 
+Patch0: 0001-lib-Fix-segfault-on-getting-property-when-daemon-is-.patch
+
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
 line tools for managing power devices attached to the system.
@@ -40,6 +42,7 @@ Headers and libraries for UPower.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure \
@@ -97,6 +100,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Fri Nov 08 2013 Bastien Nocera <bnocera@redhat.com> 0.99.0-2
+- Fix crash when D-Bus isn't available
+
 * Tue Oct 29 2013 Richard Hughes <rhughes@redhat.com> - 0.99.0-1
 - New upstream release
 - This version contains major API changes and bumps library soname.
