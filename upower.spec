@@ -1,11 +1,15 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.23
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
+
+# upstream patches
+Patch1: 0004-linux-Clamp-percentage-for-overfull-batteries.patch
+
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
 BuildRequires:  intltool
@@ -40,6 +44,8 @@ Headers and libraries for UPower.
 
 %prep
 %setup -q
+
+%patch1 -p1 -b .linux-Clamp-percentage-for-overfull-batteries
 
 %build
 %configure \
@@ -101,6 +107,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Sat Dec 07 2013 Rex Dieter <rdieter@fedoraproject.org> 0.9.23-2
+- fully charged battery reported as 0% charged (#1025980)
+
 * Fri Oct 18 2013 Richard Hughes <rhughes@redhat.com> - 0.9.23-1
 - New upstream release
 - Add missing dbus-glib-1 to private requires
