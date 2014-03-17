@@ -42,6 +42,7 @@ Headers and libraries for UPower.
 %package devel-docs
 Summary: Headers and libraries for UPower
 Requires: %{name} = %{version}-%{release}
+BuildArch: noarch
 
 %description devel-docs
 Developer documentation for for libupower-glib.
