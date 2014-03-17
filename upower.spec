@@ -40,6 +40,13 @@ Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
 %description devel
 Headers and libraries for UPower.
 
+%package devel-docs
+Summary: Headers and libraries for UPower
+Requires: %{name} = %{version}-%{release}
+
+%description devel-docs
+Developer documentation for for libupower-glib.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -89,9 +96,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %files devel
 %defattr(-,root,root,-)
 %{_datadir}/dbus-1/interfaces/*.xml
-%{_datadir}/gtk-doc
-%dir %{_datadir}/gtk-doc/html/UPower
-%{_datadir}/gtk-doc/html/UPower/*
 %{_libdir}/libupower-glib.so
 %{_libdir}/pkgconfig/*.pc
 %{_datadir}/gir-1.0/*.gir
@@ -99,7 +103,17 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/up-*.h
 %{_includedir}/libupower-glib/upower.h
 
+%files devel-docs
+%defattr(-,root,root,-)
+%{_datadir}/gtk-doc
+%dir %{_datadir}/gtk-doc/html/UPower
+%{_datadir}/gtk-doc/html/UPower/*
+
 %changelog
+* Mon Mar 17 2014 Richard Hughes <rhughes@redhat.com> - 0.99.0-3
+- Split out a new devel-docs subpackage to fix multilib_policy=all installs.
+- Resolves: #1070661
+
 * Fri Nov 08 2013 Bastien Nocera <bnocera@redhat.com> 0.99.0-2
 - Fix crash when D-Bus isn't available
 
