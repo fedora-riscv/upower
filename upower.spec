@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -35,7 +35,6 @@ line tools for managing power devices attached to the system.
 Summary: Headers and libraries for UPower
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
-Obsoletes: DeviceKit-power-devel < 1:0.9.0-2
 
 %description devel
 Headers and libraries for UPower.
@@ -110,6 +109,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Mon May  5 2014 Peter Robinson <pbrobinson@fedoraproject.org> 0.99.0-4
+- Rebuild for libimobiledevice 1.1.6
+
 * Mon Mar 17 2014 Richard Hughes <rhughes@redhat.com> - 0.99.0-3
 - Split out a new devel-docs subpackage to fix multilib_policy=all installs.
 - Resolves: #1070661
