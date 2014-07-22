@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -109,6 +109,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Jul 22 2014 Kalev Lember <kalevlember@gmail.com> - 0.99.0-6
+- Rebuilt for gobject-introspection 1.41.4
+
 * Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.99.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
