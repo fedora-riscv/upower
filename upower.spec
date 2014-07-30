@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.9.23
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -107,6 +107,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %changelog
+* Wed Jul 30 2014 Peter Robinson <pbrobinson@fedoraproject.org> 0.9.23-3
+- Rebuild for libimobiledevice for iOS7
+
 * Sat Dec 07 2013 Rex Dieter <rdieter@fedoraproject.org> 0.9.23-2
 - fully charged battery reported as 0% charged (#1025980)
 
