@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.0
-Release:        7%{?dist}
+Version:        0.99.1
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -18,14 +18,10 @@ BuildRequires:  libimobiledevice-devel
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  dbus-devel  >= 1.2
 BuildRequires:  dbus-glib-devel >= 0.82
-BuildRequires:  polkit-devel >= 0.92
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
-Requires:       polkit >= 0.92
 Requires:       udev
 Requires:       gobject-introspection
-
-Patch0: 0001-lib-Fix-segfault-on-getting-property-when-daemon-is-.patch
 
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
@@ -48,7 +44,6 @@ Developer documentation for for libupower-glib.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure \
@@ -109,6 +104,19 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Mon Aug 18 2014 Richard Hughes <rhughes@redhat.com> - 0.99.1-1
+- New upstream release
+- Create the history directory at runtime
+- Do not log a critical warning when using _set_object_path_sync()
+- Fix API doc for up_client_get_on_battery()
+- Fix possible UpHistoryItem leak on failure
+- Fix segfault on getting property when daemon is not running
+- Fix shutdown on boot on some machines
+- Fix small memleak on startup with Logitech devices
+- Free the obtained device list array after use
+- Remove IsDocked property
+- Remove unused polkit dependency
+
 * Mon Aug 18 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.99.0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
