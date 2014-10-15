@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -38,6 +38,7 @@ Headers and libraries for UPower.
 %package devel-docs
 Summary: Headers and libraries for UPower
 Requires: %{name} = %{version}-%{release}
+BuildArch: noarch
 
 %description devel-docs
 Developer documentation for for libupower-glib.
@@ -104,6 +105,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Oct 15 2014 Peter Robinson <pbrobinson@fedoraproject.org> 0.99.1-2
+- Rebuild for libimobiledevice 1.1.7
+
 * Mon Aug 18 2014 Richard Hughes <rhughes@redhat.com> - 0.99.1-1
 - New upstream release
 - Create the history directory at runtime
