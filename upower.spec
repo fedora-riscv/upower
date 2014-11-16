@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -22,6 +22,11 @@ BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
 Requires:       udev
 Requires:       gobject-introspection
+
+%if 0%{?fedora}
+# From rhughes-f20-gnome-3-12 copr
+Obsoletes:      compat-upower09 < 0.99
+%endif
 
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
@@ -105,6 +110,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Sun Nov 16 2014 Kalev Lember <kalevlember@gmail.com> - 0.99.1-3
+- Obsolete compat-upower09 from rhughes-f20-gnome-3-12 copr
+
 * Wed Oct 15 2014 Peter Robinson <pbrobinson@fedoraproject.org> 0.99.1-2
 - Rebuild for libimobiledevice 1.1.7
 
