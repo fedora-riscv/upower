@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.1
-Release:        3%{?dist}
+Version:        0.99.2
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -110,6 +110,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Thu Dec 18 2014 Richard Hughes <rhughes@redhat.com> - 0.99.2-1
+- New upstream release
+- Fix various memory and reference leaks
+- Respect the CriticalPowerAction config option
+- Set update-time on the aggregate device
+- Update display device when battery is removed
+
 * Sun Nov 16 2014 Kalev Lember <kalevlember@gmail.com> - 0.99.1-3
 - Obsolete compat-upower09 from rhughes-f20-gnome-3-12 copr
 
