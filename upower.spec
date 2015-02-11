@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -12,7 +12,7 @@ BuildRequires:  intltool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
 %ifnarch s390 s390x
-BuildRequires:  libusb1-devel
+BuildRequires:  libusbx-devel
 BuildRequires:  libimobiledevice-devel
 %endif
 BuildRequires:  glib2-devel >= 2.6.0
@@ -74,8 +74,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %postun -p /sbin/ldconfig
 
 %files -f upower.lang
-%defattr(-,root,root,-)
-%doc NEWS COPYING AUTHORS HACKING README
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc NEWS AUTHORS HACKING README
 %{_libdir}/libupower-glib.so.*
 %{_sysconfdir}/dbus-1/system.d/*.conf
 %ifnarch s390 s390x
@@ -94,7 +95,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 /usr/lib/systemd/system/*.service
 
 %files devel
-%defattr(-,root,root,-)
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/libupower-glib.so
 %{_libdir}/pkgconfig/*.pc
@@ -104,12 +104,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %files devel-docs
-%defattr(-,root,root,-)
 %{_datadir}/gtk-doc
 %dir %{_datadir}/gtk-doc/html/UPower
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Feb 11 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.99.2-2
+- Rebuild (libimobiledevice)
+- Use %%license
+
 * Thu Dec 18 2014 Richard Hughes <rhughes@redhat.com> - 0.99.2-1
 - New upstream release
 - Fix various memory and reference leaks
