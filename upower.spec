@@ -1,11 +1,15 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
+
+## upstream fixes
+Patch5: 0005-lib-Fix-crash-on-uninitialized-variant.patch
+
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
 BuildRequires:  intltool
@@ -35,13 +39,13 @@ line tools for managing power devices attached to the system.
 %package devel
 Summary: Headers and libraries for UPower
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Headers and libraries for UPower.
 
 %package devel-docs
-Summary: Headers and libraries for UPower
+Summary: Developer documentation for for libupower-glib
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
@@ -49,7 +53,7 @@ BuildArch: noarch
 Developer documentation for for libupower-glib.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure \
@@ -109,6 +113,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Mar 18 2015 Rex Dieter <rdieter@fedoraproject.org> - 0.99.2-4
+- pull in upstream crash fix (#1128390)
+- use %%autosetup
+- -devel: tighten subpkg dep via %%_isa
+- -devel-docs: fix Summary
+
 * Sat Feb 21 2015 Till Maas <opensource@till.name> - 0.99.2-3
 - Rebuilt for Fedora 23 Change
   https://fedoraproject.org/wiki/Changes/Harden_all_packages_with_position-independent_code
