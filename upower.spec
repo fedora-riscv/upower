@@ -1,18 +1,22 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.2
-Release:        1%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
+
+## upstream fixes
+Patch5: 0005-lib-Fix-crash-on-uninitialized-variant.patch
+
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
 BuildRequires:  intltool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
 %ifnarch s390 s390x
-BuildRequires:  libusb1-devel
+BuildRequires:  libusbx-devel
 BuildRequires:  libimobiledevice-devel
 %endif
 BuildRequires:  glib2-devel >= 2.6.0
@@ -35,13 +39,13 @@ line tools for managing power devices attached to the system.
 %package devel
 Summary: Headers and libraries for UPower
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Headers and libraries for UPower.
 
 %package devel-docs
-Summary: Headers and libraries for UPower
+Summary: Developer documentation for for libupower-glib
 Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
@@ -49,7 +53,7 @@ BuildArch: noarch
 Developer documentation for for libupower-glib.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure \
@@ -74,8 +78,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %postun -p /sbin/ldconfig
 
 %files -f upower.lang
-%defattr(-,root,root,-)
-%doc NEWS COPYING AUTHORS HACKING README
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc NEWS AUTHORS HACKING README
 %{_libdir}/libupower-glib.so.*
 %{_sysconfdir}/dbus-1/system.d/*.conf
 %ifnarch s390 s390x
@@ -94,7 +99,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 /usr/lib/systemd/system/*.service
 
 %files devel
-%defattr(-,root,root,-)
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_libdir}/libupower-glib.so
 %{_libdir}/pkgconfig/*.pc
@@ -104,12 +108,25 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %files devel-docs
-%defattr(-,root,root,-)
 %{_datadir}/gtk-doc
 %dir %{_datadir}/gtk-doc/html/UPower
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Mar 18 2015 Rex Dieter <rdieter@fedoraproject.org> - 0.99.2-4
+- pull in upstream crash fix (#1128390)
+- use %%autosetup
+- -devel: tighten subpkg dep via %%_isa
+- -devel-docs: fix Summary
+
+* Sat Feb 21 2015 Till Maas <opensource@till.name> - 0.99.2-3
+- Rebuilt for Fedora 23 Change
+  https://fedoraproject.org/wiki/Changes/Harden_all_packages_with_position-independent_code
+
+* Wed Feb 11 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.99.2-2
+- Rebuild (libimobiledevice)
+- Use %%license
+
 * Thu Dec 18 2014 Richard Hughes <rhughes@redhat.com> - 0.99.2-1
 - New upstream release
 - Fix various memory and reference leaks
