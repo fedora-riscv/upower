@@ -1,14 +1,11 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.2
-Release:        4%{?dist}
+Version:        0.99.3
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
-
-## upstream fixes
-Patch5: 0005-lib-Fix-crash-on-uninitialized-variant.patch
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -113,6 +110,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Thu May 28 2015 Richard Hughes <rhughes@redhat.com> - 0.99.3-1
+- New upstream release
+- Fix several crashes
+- Properly detect bluetooth mice and keyboards that are HID devices
+- Support Logitech Unifying in Linux 3.19
+- Work-around broken battery on the Onda v975w
+
 * Wed Mar 18 2015 Rex Dieter <rdieter@fedoraproject.org> - 0.99.2-4
 - pull in upstream crash fix (#1128390)
 - use %%autosetup
