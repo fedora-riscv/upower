@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.3
-Release:        3%{?dist}
+Version:        0.99.4
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -17,8 +17,6 @@ BuildRequires:  libusbx-devel
 BuildRequires:  libimobiledevice-devel
 %endif
 BuildRequires:  glib2-devel >= 2.6.0
-BuildRequires:  dbus-devel  >= 1.2
-BuildRequires:  dbus-glib-devel >= 0.82
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
 Requires:       udev
@@ -110,6 +108,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Feb 16 2016 Richard Hughes <rhughes@redhat.com> - 0.99.4-1
+- New upstream release
+- Add support for Logitech G700s/G700 Gaming Mouse
+- Change the default low battery policy to percentage
+
 * Fri Feb 05 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
