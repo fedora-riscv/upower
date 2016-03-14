@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -21,6 +21,8 @@ BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
 Requires:       udev
 Requires:       gobject-introspection
+
+Patch0:         0001-daemon-fix-get_critical_action.patch
 
 %if 0%{?fedora}
 # From rhughes-f20-gnome-3-12 copr
@@ -108,6 +110,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Mon Mar 14 2016 Bastien Nocera <bnocera@redhat.com> 0.99.4-2
+- Fix getting the critical action
+
 * Tue Feb 16 2016 Richard Hughes <rhughes@redhat.com> - 0.99.4-1
 - New upstream release
 - Add support for Logitech G700s/G700 Gaming Mouse
