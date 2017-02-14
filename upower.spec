@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -19,6 +19,7 @@ BuildRequires:  libimobiledevice-devel
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
+BuildRequires:  systemd
 Requires:       udev
 Requires:       gobject-introspection
 
@@ -110,6 +111,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Feb 14 2017 Dan Horák <dan[at]danny.cz> - 0.99.4-4
+- Add explicit BR:systemd to fix s390(x) build
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
