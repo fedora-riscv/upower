@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.4
-Release:        4%{?dist}
+Version:        0.99.5
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -22,8 +22,6 @@ BuildRequires:  gtk-doc
 BuildRequires:  systemd
 Requires:       udev
 Requires:       gobject-introspection
-
-Patch0:         0001-daemon-fix-get_critical_action.patch
 
 %if 0%{?fedora}
 # From rhughes-f20-gnome-3-12 copr
@@ -111,6 +109,16 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Mon Jul 24 2017 Richard Hughes <rhughes@redhat.com> - 0.99.5-1
+- New upstream release
+- Add BatteryLevel property for devices with a finite number of power levels
+- Add support for pausing and resuming of the daemon poll
+- Do not spin in a loop when /proc/timer_stats cannot be written
+- Fix reading and writing the keyboard brightness level
+- Get a serial number for device batteries
+- Refresh devices after waking up from sleep
+- Lower initial power usage when iDevice isn't accessible
+
 * Tue Feb 14 2017 Dan Horák <dan[at]danny.cz> - 0.99.4-4
 - Add explicit BR:systemd to fix s390(x) build
 
