@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.5
-Release:        1%{?dist}
+Release:        1%{?dist}.1
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -19,6 +19,7 @@ BuildRequires:  libimobiledevice-devel
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
+BuildRequires:  systemd
 Requires:       udev
 Requires:       gobject-introspection
 
@@ -108,6 +109,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Aug 02 2017 Dan Horák <dan[at]danny.cz> - 0.99.5-1.1
+- Add explicit BR:systemd to fix s390(x) build
+
 * Mon Jul 24 2017 Richard Hughes <rhughes@redhat.com> - 0.99.5-1
 - New upstream release
 - Add BatteryLevel property for devices with a finite number of power levels
