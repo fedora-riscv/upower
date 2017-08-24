@@ -1,11 +1,13 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
+
+Patch0:		0001-linux-Correctly-close-inhibitor-FD.patch
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -109,6 +111,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Thu Aug 24 2017 Benjamin Berg <bberg@redhat.com> - 0.99.5-4
+- Add patch to not correctly close the inhibitor FD
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.5-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
