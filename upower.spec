@@ -1,6 +1,6 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.6
+Version:        0.99.7
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -109,6 +109,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Nov 28 2017 Bastien Nocera <bnocera@redhat.com> - 0.99.7-1
++ upower-0.99.7-1
+- Update to 0.99.7
+- Add Bluetooth LE battery support
+- Fix critical action after resume from hibernate
+
 * Mon Sep 11 2017 Richard Hughes <rhughes@redhat.com> - 0.99.6-1
 - New upstream release
 - Detect joysticks as gaming input devices
