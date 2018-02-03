@@ -1,7 +1,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
@@ -69,9 +69,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang upower
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files -f upower.lang
 %{!?_licensedir:%global license %%doc}
@@ -109,6 +107,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Sat Feb 03 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.99.7-2
+- Switch to %%ldconfig_scriptlets
+
 * Tue Nov 28 2017 Bastien Nocera <bnocera@redhat.com> - 0.99.7-1
 + upower-0.99.7-1
 - Update to 0.99.7
