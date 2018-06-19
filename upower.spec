@@ -1,11 +1,11 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.7
+Version:        0.99.8
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
-Source0:        http://upower.freedesktop.org/releases/upower-%{version}.tar.xz
+Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/9125ab7ee96fdc4ecc68cfefb50c1cab/%{name}-%{version}.tar.xz
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -109,6 +109,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Jun 19 2018 Bastien Nocera <bnocera@redhat.com> - 0.99.8-1
++ upower-0.99.8-1
+- Update to 0.99.8
+
 * Tue Nov 28 2017 Bastien Nocera <bnocera@redhat.com> - 0.99.7-1
 + upower-0.99.7-1
 - Update to 0.99.7
