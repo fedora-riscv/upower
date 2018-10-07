@@ -1,11 +1,13 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/9125ab7ee96fdc4ecc68cfefb50c1cab/%{name}-%{version}.tar.xz
+# Backported from upstream
+Patch0:         0001-daemon-Fix-upower-not-having-access-to-udev-events.patch
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -107,6 +109,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Sun Oct 07 2018 Kalev Lember <klember@redhat.com> - 0.99.8-3
+- Backport an upstream fix for upower not having access to udev events
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
