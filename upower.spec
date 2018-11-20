@@ -1,13 +1,12 @@
+%global commit  2282c7c0e53fb31816b824c9d1f547e8
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.8
-Release:        3%{?dist}
+Version:        0.99.9
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
-Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/9125ab7ee96fdc4ecc68cfefb50c1cab/%{name}-%{version}.tar.xz
-# Backported from upstream
-Patch0:         0001-daemon-Fix-upower-not-having-access-to-udev-events.patch
+Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -109,6 +108,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Nov 20 2018 Christian Kellner <ckellner@redhat.com> - 0.99.9-1
+- New upstream release
+- Drop unneccessary patch to fix udev events access
+- Fix daemon lockdown issues (keyboard backlight, AC status changes)
+- Out-of-tree build fixes and documentation fixes
+
 * Sun Oct 07 2018 Kalev Lember <klember@redhat.com> - 0.99.8-3
 - Backport an upstream fix for upower not having access to udev events
 
