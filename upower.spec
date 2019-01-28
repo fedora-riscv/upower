@@ -4,7 +4,6 @@ Name:           upower
 Version:        0.99.9
 Release:        1%{?dist}
 License:        GPLv2+
-Group:          System Environment/Libraries
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
 
@@ -35,7 +34,6 @@ line tools for managing power devices attached to the system.
 
 %package devel
 Summary: Headers and libraries for UPower
-Group: Development/Libraries
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
