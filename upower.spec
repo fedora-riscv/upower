@@ -1,7 +1,7 @@
-%global commit  2282c7c0e53fb31816b824c9d1f547e8
+%global commit  c438511024b9bc5a904f8775cfc8e4c4
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.9
+Version:        0.99.10
 Release:        1%{?dist}
 License:        GPLv2+
 Group:          System Environment/Libraries
@@ -108,6 +108,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Feb 20 2019 Christian Kellner <ckellner@redhat.com> - 0.99.10-1
+- New upstream release with the following changes:
+- Set 'pending-charge' for DisplayDevice if at least one battery is in
+  the 'pending-charge' state
+- Map pending-charge to fully-charged when charge is 100%
+
 * Tue Nov 20 2018 Christian Kellner <ckellner@redhat.com> - 0.99.9-1
 - New upstream release
 - Drop unneccessary patch to fix udev events access
