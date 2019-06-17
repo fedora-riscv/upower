@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  roles:
+  - role: standard-test-source
+    tags:
+    - always
+  - role: standard-test-basic
+    tags:
+    - atomic
+    - classic
+    required_packages:
+    - upower
+    - pygobject3-devel
+    - python3-dbus
+    - python3-dbusmock
+    - umockdev-devel
+    tests:
+    - smoke:
+        dir: smoke
+        run: upower -d
+    - integration:
+        dir: .
+        run: ./run-it.sh source/src/linux/integration-test
