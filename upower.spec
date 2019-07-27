@@ -2,7 +2,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
@@ -106,6 +106,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Sat Jul 27 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.10-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Wed Feb 20 2019 Christian Kellner <ckellner@redhat.com> - 0.99.10-1
 - New upstream release with the following changes:
 - Set 'pending-charge' for DisplayDevice if at least one battery is in
