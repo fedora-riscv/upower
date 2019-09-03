@@ -1,15 +1,14 @@
-%global commit  c438511024b9bc5a904f8775cfc8e4c4
+%global commit  93cfe7c8d66ed486001c4f3f55399b7a
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.10
-Release:        2%{?dist}
+Version:        0.99.11
+Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
-BuildRequires:  intltool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
 %ifnarch s390 s390x
@@ -75,11 +74,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %license COPYING
 %doc NEWS AUTHORS HACKING README
 %{_libdir}/libupower-glib.so.*
-%{_sysconfdir}/dbus-1/system.d/*.conf
+%{_datadir}/dbus-1/system.d/*.conf
 %ifnarch s390 s390x
 /usr/lib/udev/rules.d/*.rules
 %endif
-%dir %{_localstatedir}/lib/upower
+%ghost %dir %{_localstatedir}/lib/upower
 %dir %{_sysconfdir}/UPower
 %config %{_sysconfdir}/UPower/UPower.conf
 %{_bindir}/*
@@ -106,6 +105,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Sep  3 2019 Christian Kellner <ckellner@redhat.com> - 0.99.11-1
+- New upstream release 0.99.11
+- Intltool has been replaced by gettext
+- D-Bus configuration moved from sysconfdir to datadir
+- Systemd is creating /var/lib/upower, so 'ghost' the dir
+
 * Sat Jul 27 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.10-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
