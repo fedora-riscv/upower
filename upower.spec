@@ -2,7 +2,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.11
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
@@ -69,6 +69,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %ldconfig_scriptlets
 
+%post
+%systemd_post upower.service
+
+%preun
+%systemd_preun upower.service
+
+%postun
+%systemd_postun_with_restart upower.service
+
 %files -f upower.lang
 %{!?_licensedir:%global license %%doc}
 %license COPYING
@@ -76,7 +85,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libupower-glib.so.*
 %{_datadir}/dbus-1/system.d/*.conf
 %ifnarch s390 s390x
-/usr/lib/udev/rules.d/*.rules
+%{_udevrulesdir}/*.rules
 %endif
 %ghost %dir %{_localstatedir}/lib/upower
 %dir %{_sysconfdir}/UPower
@@ -88,7 +97,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_mandir}/man7/*
 %{_mandir}/man8/*
 %{_datadir}/dbus-1/system-services/*.service
-/usr/lib/systemd/system/*.service
+%{_unitdir}/*.service
 
 %files devel
 %{_datadir}/dbus-1/interfaces/*.xml
@@ -100,11 +109,16 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_includedir}/libupower-glib/upower.h
 
 %files devel-docs
-%{_datadir}/gtk-doc
+%dir %{_datadir}/gtk-doc
 %dir %{_datadir}/gtk-doc/html/UPower
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Sep  4 2019 Christian Kellner <ckellner@redhat.com> - 0.99.11-2
+- Add systemd service snippets
+- Use macros for _unitdir and _udevrulesdir
+- Mark _datadir/gtk-doc as directory
+
 * Tue Sep  3 2019 Christian Kellner <ckellner@redhat.com> - 0.99.11-1
 - New upstream release 0.99.11
 - Intltool has been replaced by gettext
