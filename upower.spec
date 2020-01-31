@@ -2,7 +2,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.11
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
@@ -114,6 +114,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Fri Jan 31 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.11-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Wed Sep  4 2019 Christian Kellner <ckellner@redhat.com> - 0.99.11-2
 - Add systemd service snippets
 - Use macros for _unitdir and _udevrulesdir
