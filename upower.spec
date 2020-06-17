@@ -2,10 +2,13 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.11
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
+# update libplist test in configure.ac for 2.2.0
+# not upstreamed yet as it needs to be smarter
+Patch0:         upower-0.99.11-libplist-2.0.patch
 
 BuildRequires:  sqlite-devel
 BuildRequires:  libtool
@@ -19,6 +22,11 @@ BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
 BuildRequires:  systemd
+# Only required while we're patching configure.ac
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  gettext-devel
+
 Requires:       udev
 Requires:       gobject-introspection
 
@@ -50,6 +58,7 @@ Developer documentation for for libupower-glib.
 %autosetup -p1
 
 %build
+autoreconf -i
 %configure \
         --enable-gtk-doc \
         --disable-static \
@@ -114,6 +123,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Jun 16 2020 Adam Williamson <awilliam@redhat.com> - 0.99.11-4
+- Fix imobiledevice support with new libplist, rebuild for soname bumps
+
 * Fri Jan 31 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.11-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
