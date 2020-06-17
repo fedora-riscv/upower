@@ -2,15 +2,16 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.11
-Release:        4%{?dist}
+Release:        5%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
-# update libplist test in configure.ac for 2.2.0
-# not upstreamed yet as it needs to be smarter
-Patch0:         upower-0.99.11-libplist-2.0.patch
+
+Patch0: 0001-linux-Add-support-for-iPhone-XR-XS-models.patch
+Patch1: 0001-build-Use-a-newer-libplist-if-available.patch
 
 BuildRequires:  sqlite-devel
+BuildRequires:  git
 BuildRequires:  libtool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
@@ -55,7 +56,7 @@ BuildArch: noarch
 Developer documentation for for libupower-glib.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -S git
 
 %build
 autoreconf -i
@@ -123,6 +124,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Wed Jun 17 2020 Bastien Nocera <bnocera@redhat.com> - 0.99.11-5
++ upower-0.99.11-5
+- Use upstreamed libplist patch
+- Add support for iPhone XS,XR
+
 * Tue Jun 16 2020 Adam Williamson <awilliam@redhat.com> - 0.99.11-4
 - Fix imobiledevice support with new libplist, rebuild for soname bumps
 
