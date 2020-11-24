@@ -2,7 +2,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.11
-Release:        6%{?dist}
+Release:        7%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
@@ -16,8 +16,10 @@ BuildRequires:  libtool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
 %ifnarch s390 s390x
+%if ! 0%{?rhel}
 BuildRequires:  libusbx-devel
 BuildRequires:  libimobiledevice-devel
+%endif
 %endif
 BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  gobject-introspection-devel
@@ -124,6 +126,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Nov 24 2020 Bastien Nocera <bnocera@redhat.com> - 0.99.11-7
++ upower-0.99.11-7
+- Disable libimobiledevice integration on RHEL
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.11-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
