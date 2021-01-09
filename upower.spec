@@ -10,6 +10,7 @@ Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%
 Patch0: 0001-linux-Add-support-for-iPhone-XR-XS-models.patch
 Patch1: 0001-build-Use-a-newer-libplist-if-available.patch
 
+BuildRequires: make
 BuildRequires:  sqlite-devel
 BuildRequires:  git
 BuildRequires:  libtool
