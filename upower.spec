@@ -1,15 +1,11 @@
 %global commit  93cfe7c8d66ed486001c4f3f55399b7a
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.11
-Release:        9%{?dist}
+Version:        0.99.12
+Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
-Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/%{commit}/%{name}-%{version}.tar.xz
-
-Patch0: 0001-linux-Add-support-for-iPhone-XR-XS-models.patch
-Patch1: 0001-build-Use-a-newer-libplist-if-available.patch
-Patch2: upower-no-usb-dep.patch
+Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/244f5966c58773bbd3b4c507c549560f/upower-0.99.12.tar.xz
 
 BuildRequires: make
 BuildRequires:  sqlite-devel
@@ -127,6 +123,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Thu Jun 17 2021 Bastien Nocera <bnocera@redhat.com> - 0.99.12-1
++ upower-0.99.12-1
+- Update to 0.99.12
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.11-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
