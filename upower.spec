@@ -2,7 +2,7 @@
 Summary:        Power Management Service
 Name:           upower
 Version:        0.99.12
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/244f5966c58773bbd3b4c507c549560f/upower-0.99.12.tar.xz
@@ -123,6 +123,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.12-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Thu Jun 17 2021 Bastien Nocera <bnocera@redhat.com> - 0.99.12-1
 + upower-0.99.12-1
 - Update to 0.99.12
