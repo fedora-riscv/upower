@@ -1,11 +1,11 @@
 %global commit  93cfe7c8d66ed486001c4f3f55399b7a
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.12
+Version:        0.99.13
 Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
-Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/244f5966c58773bbd3b4c507c549560f/upower-0.99.12.tar.xz
+Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/177df5b9f9b76f25a2ad9da41aa0c1fa/upower-0.99.13.tar.xz
 
 BuildRequires: make
 BuildRequires:  sqlite-devel
@@ -123,6 +123,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Tue Aug 17 2021 Bastien Nocera <bnocera@redhat.com> - 0.99.13-1
++ upower-0.99.13-1
+- Update to 0.99.13
+
 * Thu Jun 17 2021 Bastien Nocera <bnocera@redhat.com> - 0.99.12-1
 + upower-0.99.12-1
 - Update to 0.99.12
