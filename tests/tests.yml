@@ -4,6 +4,8 @@
   - role: standard-test-source
     tags:
     - always
+    required_packages:
+    - git-core
   - role: standard-test-basic
     tags:
     - atomic
