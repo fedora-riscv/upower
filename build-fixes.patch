@@ -59,3 +59,42 @@ index 1bab59b..2ff7baf 100644
 -- 
 2.34.1
 
+From 7660d6d8850e37db8c7f0d06316a82e956e89e81 Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Mon, 7 Feb 2022 11:09:21 +0100
+Subject: [PATCH] build: Fix missing libm link on some platforms
+
+This should fix the PPC64 and ARMv7 builds.
+---
+ meson.build     | 1 +
+ src/meson.build | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index c612953..be7658a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -45,6 +45,7 @@ glib_dep = dependency('glib-2.0', version: '>=' + glib_min_version)
+ gobject_dep = dependency('gobject-2.0', version: '>=' + glib_min_version)
+ gio_dep = dependency('gio-2.0', version: '>=' + glib_min_version)
+ gio_unix_dep = dependency('gio-unix-2.0', version: '>=' + glib_min_version)
++m_dep = cc.find_library('m', required: true)
+ 
+ xsltproc = find_program('xsltproc', required: get_option('gtk-doc') or get_option('man'))
+ 
+diff --git a/src/meson.build b/src/meson.build
+index d0d8141..406f9cb 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -6,7 +6,7 @@ upowerd_deps = declare_dependency(
+         include_directories('../dbus'),
+     ],
+     dependencies: [
+-        glib_dep, gobject_dep, gio_dep, gio_unix_dep, libupower_glib_dep, upowerd_dbus_dep
++        m_dep, glib_dep, gobject_dep, gio_dep, gio_unix_dep, libupower_glib_dep, upowerd_dbus_dep
+     ],
+     compile_args: [
+         '-DUP_COMPILATION',
+-- 
+2.34.1
+

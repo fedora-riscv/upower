@@ -86,9 +86,7 @@ Developer documentation for for libupower-glib.
 %doc NEWS AUTHORS HACKING README
 %{_libdir}/libupower-glib.so.*
 %{_datadir}/dbus-1/system.d/*.conf
-%ifnarch s390 s390x
 %{_udevrulesdir}/*.rules
-%endif
 %ghost %dir %{_localstatedir}/lib/upower
 %dir %{_sysconfdir}/UPower
 %config %{_sysconfdir}/UPower/UPower.conf
