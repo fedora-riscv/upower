@@ -1,16 +1,16 @@
 %global commit  93cfe7c8d66ed486001c4f3f55399b7a
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.13
-Release:        2%{?dist}
+Version:        0.99.14
+Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
-Source0:        https://gitlab.freedesktop.org/upower/upower/uploads/177df5b9f9b76f25a2ad9da41aa0c1fa/upower-0.99.13.tar.xz
+Source0:        https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
+Patch0:         build-fixes.patch
 
-BuildRequires: make
+BuildRequires:  meson
 BuildRequires:  sqlite-devel
 BuildRequires:  git
-BuildRequires:  libtool
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
 %ifnarch s390 s390x
@@ -22,10 +22,6 @@ BuildRequires:  glib2-devel >= 2.6.0
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  gtk-doc
 BuildRequires:  systemd
-# Only required while we're patching configure.ac
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  gettext-devel
 
 Requires:       udev
 Requires:       gobject-introspection
@@ -55,24 +51,21 @@ BuildArch: noarch
 Developer documentation for for libupower-glib.
 
 %prep
-%autosetup -p1 -S git
+%autosetup -n %{name}-v%{version} -p1 -S git
 
 %build
-autoreconf -i
-%configure \
-        --enable-gtk-doc \
-        --disable-static \
-        --enable-introspection \
+%meson \
+  -Dman=true \
+  -Dgtk-doc=true \
+  -Dintrospection=enabled \
 %ifarch s390 s390x
-	--with-backend=dummy
+  -Dos_backend=dummy
 %endif
 
-# Disable SMP build, fails to build docs
-make
+%meson_build
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+%meson_install
 
 %find_lang upower
 
@@ -93,9 +86,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %doc NEWS AUTHORS HACKING README
 %{_libdir}/libupower-glib.so.*
 %{_datadir}/dbus-1/system.d/*.conf
-%ifnarch s390 s390x
 %{_udevrulesdir}/*.rules
-%endif
 %ghost %dir %{_localstatedir}/lib/upower
 %dir %{_sysconfdir}/UPower
 %config %{_sysconfdir}/UPower/UPower.conf
@@ -123,6 +114,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/UPower/*
 
 %changelog
+* Mon Feb 07 2022 Bastien Nocera <bnocera@redhat.com> - 0.99.14-1
++ upower-0.99.14-1
+- Update to 0.99.14
+
 * Sat Jan 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.99.13-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 

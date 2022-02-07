@@ -1,0 +1,100 @@
+From 8eb8ab1056e03b68634098b754c89c5a99f33c5c Mon Sep 17 00:00:00 2001
+From: "Jan Alexander Steffens (heftig)" <heftig@archlinux.org>
+Date: Sat, 5 Feb 2022 02:26:48 +0000
+Subject: [PATCH 1/2] build: Fix default udevrulesdir
+
+We need to append 'rules.d' to the udev_dir.
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index f87de19..3858cbe 100644
+--- a/meson.build
++++ b/meson.build
+@@ -90,7 +90,7 @@ endif
+ udevrulesdir = get_option('udevrulesdir')
+ if udevrulesdir == 'auto'
+     udev_dep = dependency('udev', required: true)
+-    udevrulesdir = udev_dep.get_pkgconfig_variable('udev_dir')
++    udevrulesdir = udev_dep.get_pkgconfig_variable('udev_dir') / 'rules.d'
+ endif
+ 
+ dbusdir = get_option('datadir') / 'dbus-1'
+-- 
+2.34.1
+
+
+From 1dc74629ff24a2121f17f6e38b2c8067be0b7182 Mon Sep 17 00:00:00 2001
+From: "Jan Alexander Steffens (heftig)" <heftig@archlinux.org>
+Date: Sat, 5 Feb 2022 02:30:52 +0000
+Subject: [PATCH 2/2] build: Fix version macros
+
+The project version is a string. We need to split it into an array of
+version components.
+---
+ libupower-glib/meson.build | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/libupower-glib/meson.build b/libupower-glib/meson.build
+index 1bab59b..2ff7baf 100644
+--- a/libupower-glib/meson.build
++++ b/libupower-glib/meson.build
+@@ -1,7 +1,12 @@
++version_arr = meson.project_version().split('.')
++major_version = version_arr[0].to_int()
++minor_version = version_arr[1].to_int()
++micro_version = version_arr[2].to_int()
++
+ cdata = configuration_data()
+-cdata.set('UP_MAJOR_VERSION', meson.project_version()[0])
+-cdata.set('UP_MINOR_VERSION', meson.project_version()[1])
+-cdata.set('UP_MICRO_VERSION', meson.project_version()[2])
++cdata.set('UP_MAJOR_VERSION', major_version)
++cdata.set('UP_MINOR_VERSION', minor_version)
++cdata.set('UP_MICRO_VERSION', micro_version)
+ 
+ up_version_h = configure_file(
+     output: 'up-version.h',
+-- 
+2.34.1
+
+From 7660d6d8850e37db8c7f0d06316a82e956e89e81 Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Mon, 7 Feb 2022 11:09:21 +0100
+Subject: [PATCH] build: Fix missing libm link on some platforms
+
+This should fix the PPC64 and ARMv7 builds.
+---
+ meson.build     | 1 +
+ src/meson.build | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index c612953..be7658a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -45,6 +45,7 @@ glib_dep = dependency('glib-2.0', version: '>=' + glib_min_version)
+ gobject_dep = dependency('gobject-2.0', version: '>=' + glib_min_version)
+ gio_dep = dependency('gio-2.0', version: '>=' + glib_min_version)
+ gio_unix_dep = dependency('gio-unix-2.0', version: '>=' + glib_min_version)
++m_dep = cc.find_library('m', required: true)
+ 
+ xsltproc = find_program('xsltproc', required: get_option('gtk-doc') or get_option('man'))
+ 
+diff --git a/src/meson.build b/src/meson.build
+index d0d8141..406f9cb 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -6,7 +6,7 @@ upowerd_deps = declare_dependency(
+         include_directories('../dbus'),
+     ],
+     dependencies: [
+-        glib_dep, gobject_dep, gio_dep, gio_unix_dep, libupower_glib_dep, upowerd_dbus_dep
++        m_dep, glib_dep, gobject_dep, gio_dep, gio_unix_dep, libupower_glib_dep, upowerd_dbus_dep
+     ],
+     compile_args: [
+         '-DUP_COMPILATION',
+-- 
+2.34.1
+
