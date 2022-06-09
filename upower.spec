@@ -1,11 +1,13 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.14
+Version:        0.99.19
 Release:        %autorelease
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
-Patch0:         build-fixes.patch
+
+# Pull fix for test race condition
+Patch0:         https://gitlab.freedesktop.org/upower/upower/-/merge_requests/150.patch
 
 BuildRequires:  meson
 BuildRequires:  git
@@ -81,6 +83,7 @@ Developer documentation for for libupower-glib.
 %{_libdir}/libupower-glib.so.*
 %{_datadir}/dbus-1/system.d/*.conf
 %{_udevrulesdir}/*.rules
+%{_udevhwdbdir}/*.hwdb
 %ghost %dir %{_localstatedir}/lib/upower
 %dir %{_sysconfdir}/UPower
 %config %{_sysconfdir}/UPower/UPower.conf
