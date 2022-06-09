@@ -28,10 +28,6 @@ BuildRequires:  systemd
 Requires:       udev
 Requires:       gobject-introspection
 
-%if 0%{?fedora}
-# From rhughes-f20-gnome-3-12 copr
-Obsoletes:      compat-upower09 < 0.99
-%endif
 
 %description
 UPower (formerly DeviceKit-power) provides a daemon, API and command
