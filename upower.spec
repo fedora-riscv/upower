@@ -13,8 +13,10 @@ BuildRequires:  sqlite-devel
 BuildRequires:  git
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
+%define idevice disabled
 %ifnarch s390 s390x
 %if ! 0%{?rhel}
+%define idevice enabled
 BuildRequires:  libimobiledevice-devel
 %endif
 %endif
@@ -55,12 +57,10 @@ Developer documentation for for libupower-glib.
 
 %build
 %meson \
+  -Didevice=%{idevice} \
   -Dman=true \
   -Dgtk-doc=true \
-  -Dintrospection=enabled \
-%ifarch s390 s390x
-  -Dos_backend=dummy
-%endif
+  -Dintrospection=enabled
 
 %meson_build
 
