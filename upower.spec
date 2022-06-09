@@ -8,7 +8,6 @@ Source0:        https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{versi
 Patch0:         build-fixes.patch
 
 BuildRequires:  meson
-BuildRequires:  sqlite-devel
 BuildRequires:  git
 BuildRequires:  gettext
 BuildRequires:  libgudev1-devel
