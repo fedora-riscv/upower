@@ -1,13 +1,10 @@
 Summary:        Power Management Service
 Name:           upower
-Version:        0.99.19
+Version:        0.99.20
 Release:        %autorelease
 License:        GPLv2+
 URL:            http://upower.freedesktop.org/
 Source0:        https://gitlab.freedesktop.org/upower/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
-
-# Pull fix for test race condition
-Patch0:         https://gitlab.freedesktop.org/upower/upower/-/merge_requests/150.patch
 
 BuildRequires:  meson
 BuildRequires:  git
